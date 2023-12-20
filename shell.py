@@ -1,7 +1,7 @@
 import meowthon
 
 while True:
-	text = input('∩.• ᵕ •.∩ > ')
+	text = input('∩.^• ᵕ •^.∩ > ')
 	if text.strip() == "": continue
 	result, error = meowthon.run('<stdin>', text)
 
