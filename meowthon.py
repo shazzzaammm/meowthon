@@ -36,19 +36,19 @@ class Error:
 
 class IllegalCharError(Error):
   def __init__(self, pos_start, pos_end, details):
-    super().__init__(pos_start, pos_end, 'Illegal Character', details)
+    super().__init__(pos_start, pos_end, 'Iwwegaw Chawactew ^-^', details)
 
 class ExpectedCharError(Error):
   def __init__(self, pos_start, pos_end, details):
-    super().__init__(pos_start, pos_end, 'Expected Character', details)
+    super().__init__(pos_start, pos_end, 'Expected *runs away* Chawactew ^-^', details)
 
 class InvalidSyntaxError(Error):
   def __init__(self, pos_start, pos_end, details=''):
-    super().__init__(pos_start, pos_end, 'Invalid Syntax', details)
+    super().__init__(pos_start, pos_end, 'Invawid Syntax', details)
 
 class RTError(Error):
   def __init__(self, pos_start, pos_end, details, context):
-    super().__init__(pos_start, pos_end, 'Runtime Error', details)
+    super().__init__(pos_start, pos_end, 'Wuntime Ewwow', details)
     self.context = context
 
   def as_string(self):
@@ -63,11 +63,11 @@ class RTError(Error):
     ctx = self.context
 
     while ctx:
-      result = f'  File {pos.fn}, line {str(pos.ln + 1)}, in {ctx.display_name}\n' + result
+      result = f'  Fiwe {pos.fn}, wine {str(pos.ln + 1)}, in {ctx.display_name} >w<\n' + result
       pos = ctx.parent_entry_pos
       ctx = ctx.parent
 
-    return 'Traceback (most recent call last):\n' + result
+    return 'Twaceback (most wecent call wast) :3\n' + result
 
 #######################################
 # POSITION
@@ -322,7 +322,7 @@ class Lexer:
       return Token(TT_NE, pos_start=pos_start, pos_end=self.pos), None
 
     self.advance()
-    return None, ExpectedCharError(pos_start, self.pos, "'=' (after '!')")
+    return None, ExpectedCharError(pos_start, self.pos, "'=' (aftew '!')")
   
   def make_equals(self):
     tok_type = TT_EQ
@@ -574,7 +574,7 @@ class Parser:
     if not res.error and self.current_tok.type != TT_EOF:
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        "Token cannot appear after previous tokens"
+        "T-Token cannyot ^w^ appeaw a-a-aftew pwevious *screams* tokens *sweats*"
       ))
     return res
 
@@ -645,7 +645,7 @@ class Parser:
     if res.error:
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        "Expected 'wetuwn', 'wesume', 'bweak', 'vawiabwe', 'nyif', 'fur', 'whiwe', 'fwunc', int, float, identifier, '+', '-', '(', '[' or 'nyot'"
+        "E-Expected 'wetuwn', 'wesume', 'bweak', 'vawiabwe', 'nyif', 'fur', 'whiwe', 'fwunc', int, float, identifier, '+', '-', '(', '[' or 'nyot'"
       ))
     return res.success(expr)
 
@@ -659,7 +659,7 @@ class Parser:
       if self.current_tok.type != TT_IDENTIFIER:
         return res.failure(InvalidSyntaxError(
           self.current_tok.pos_start, self.current_tok.pos_end,
-          "Expected identifier"
+          "E-Expected identifiew"
         ))
 
       var_name = self.current_tok
@@ -669,7 +669,7 @@ class Parser:
       if self.current_tok.type != TT_EQ:
         return res.failure(InvalidSyntaxError(
           self.current_tok.pos_start, self.current_tok.pos_end,
-          "Expected '='"
+          "E-Expected '='"
         ))
 
       res.register_advancement()
@@ -683,7 +683,7 @@ class Parser:
     if res.error:
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        "Expected 'vawiabwe', 'nyif', 'fur', 'whiwe', 'fwunc', int, float, identifier, '+', '-', '(', '[' or 'nyot'"
+        "E-Expected 'vawiabwe', 'nyif', 'fur', 'whiwe', 'fwunc', int, float, identifier, '+', '-', '(', '[' or 'nyot'"
       ))
 
     return res.success(node)
@@ -705,7 +705,7 @@ class Parser:
     if res.error:
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        "Expected int, float, identifier, '+', '-', '(', '[', 'nyif', 'fur', 'whiwe', 'fwunc' or 'nyot'"
+        "E-Expected int, float, identifier, '+', '-', '(', '[', 'nyif', 'fur', 'whiwe', 'fwunc' or 'nyot'"
       ))
 
     return res.success(node)
@@ -750,7 +750,7 @@ class Parser:
         if res.error:
           return res.failure(InvalidSyntaxError(
             self.current_tok.pos_start, self.current_tok.pos_end,
-            "Expected ')', 'vawiabwe', 'nyif', 'fur', 'whiwe', 'fwunc', int, float, identifier, '+', '-', '(', '[' or 'nyot'"
+            "E-Expected ')', 'vawiabwe', 'nyif', 'fur', 'whiwe', 'fwunc', int, float, identifier, '+', '-', '(', '[' or 'nyot'"
           ))
 
         while self.current_tok.type == TT_COMMA:
@@ -763,7 +763,7 @@ class Parser:
         if self.current_tok.type != TT_RPAREN:
           return res.failure(InvalidSyntaxError(
             self.current_tok.pos_start, self.current_tok.pos_end,
-            f"Expected ',' or ')'"
+            f"E-Expected ',' ow ')'"
           ))
 
         res.register_advancement()
@@ -802,7 +802,7 @@ class Parser:
       else:
         return res.failure(InvalidSyntaxError(
           self.current_tok.pos_start, self.current_tok.pos_end,
-          "Expected ')'"
+          "E-Expected ')'"
         ))
 
     elif tok.type == TT_LSQUARE:
@@ -832,7 +832,7 @@ class Parser:
 
     return res.failure(InvalidSyntaxError(
       tok.pos_start, tok.pos_end,
-      "Expected int, float, identifier, '+', '-', '(', '[', IF', 'fur', 'whiwe', 'fwunc'"
+      "E-E-Expected int, fwoat, identifiew, '+', '-', '(', '[', IF', 'fur', 'whiwe', 'fwunc'"
     ))
 
   def list_expr(self):
@@ -843,7 +843,7 @@ class Parser:
     if self.current_tok.type != TT_LSQUARE:
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        f"Expected '['"
+        f"E-Expected '['"
       ))
 
     res.register_advancement()
@@ -857,7 +857,7 @@ class Parser:
       if res.error:
         return res.failure(InvalidSyntaxError(
           self.current_tok.pos_start, self.current_tok.pos_end,
-          "Expected ']', 'vawiabwe', 'nyif', 'fur', 'whiwe', 'fwunc', int, float, identifier, '+', '-', '(', '[' or 'nyot'"
+          "E-Expected ']', 'vawiabwe', 'nyif', 'fur', 'whiwe', 'fwunc', int, float, identifier, '+', '-', '(', '[' or 'nyot'"
         ))
 
       while self.current_tok.type == TT_COMMA:
@@ -870,7 +870,7 @@ class Parser:
       if self.current_tok.type != TT_RSQUARE:
         return res.failure(InvalidSyntaxError(
           self.current_tok.pos_start, self.current_tok.pos_end,
-          f"Expected ',' or ']'"
+          f"E-Expected ',' or ']'"
         ))
 
       res.register_advancement()
@@ -914,7 +914,7 @@ class Parser:
         else:
           return res.failure(InvalidSyntaxError(
             self.current_tok.pos_start, self.current_tok.pos_end,
-            "Expected 'cwose'"
+            "E-Expected 'cwose'"
           ))
       else:
         expr = res.register(self.statement())
@@ -945,7 +945,7 @@ class Parser:
     if not self.current_tok.matches(TT_KEYWORD, case_keyword):
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        f"Expected '{case_keyword}'"
+        f"E-Expected '{case_keyword}'"
       ))
 
     res.register_advancement()
@@ -957,7 +957,7 @@ class Parser:
     if not self.current_tok.matches(TT_KEYWORD, 'pwease'):
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        f"Expected 'pwease'"
+        f"E-Expected 'pwease'"
       ))
 
     res.register_advancement()
@@ -997,7 +997,7 @@ class Parser:
     if not self.current_tok.matches(TT_KEYWORD, 'fur'):
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        f"Expected 'fur'"
+        f"E-Expected 'fur'"
       ))
 
     res.register_advancement()
@@ -1006,7 +1006,7 @@ class Parser:
     if self.current_tok.type != TT_IDENTIFIER:
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        f"Expected identifier"
+        f"E-Expected identifier"
       ))
 
     var_name = self.current_tok
@@ -1016,7 +1016,7 @@ class Parser:
     if self.current_tok.type != TT_EQ:
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        f"Expected '='"
+        f"E-Expected '='"
       ))
     
     res.register_advancement()
@@ -1028,7 +1028,7 @@ class Parser:
     if not self.current_tok.matches(TT_KEYWORD, 'tuwu'):
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        f"Expected 'tuwu'"
+        f"E-Expected 'tuwu'"
       ))
     
     res.register_advancement()
@@ -1049,7 +1049,7 @@ class Parser:
     if not self.current_tok.matches(TT_KEYWORD, 'pwease'):
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        f"Expected 'pwease'"
+        f"E-Expected 'pwease'"
       ))
 
     res.register_advancement()
@@ -1065,7 +1065,7 @@ class Parser:
       if not self.current_tok.matches(TT_KEYWORD, 'cwose'):
         return res.failure(InvalidSyntaxError(
           self.current_tok.pos_start, self.current_tok.pos_end,
-          f"Expected 'cwose'"
+          f"E-Expected 'cwose'"
         ))
 
       res.register_advancement()
@@ -1084,7 +1084,7 @@ class Parser:
     if not self.current_tok.matches(TT_KEYWORD, 'whiwe'):
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        f"Expected 'whiwe'"
+        f"E-Expected 'whiwe'"
       ))
 
     res.register_advancement()
@@ -1096,7 +1096,7 @@ class Parser:
     if not self.current_tok.matches(TT_KEYWORD, 'pwease'):
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        f"Expected 'pwease'"
+        f"E-Expected 'pwease'"
       ))
 
     res.register_advancement()
@@ -1112,7 +1112,7 @@ class Parser:
       if not self.current_tok.matches(TT_KEYWORD, 'cwose'):
         return res.failure(InvalidSyntaxError(
           self.current_tok.pos_start, self.current_tok.pos_end,
-          f"Expected 'cwose'"
+          f"E-Expected 'cwose'"
         ))
 
       res.register_advancement()
@@ -1131,7 +1131,7 @@ class Parser:
     if not self.current_tok.matches(TT_KEYWORD, 'fwunc'):
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        f"Expected 'fwunc'"
+        f"E-Expected 'fwunc'"
       ))
 
     res.register_advancement()
@@ -1144,14 +1144,14 @@ class Parser:
       if self.current_tok.type != TT_LPAREN:
         return res.failure(InvalidSyntaxError(
           self.current_tok.pos_start, self.current_tok.pos_end,
-          f"Expected '('"
+          f"E-Expected '('"
         ))
     else:
       var_name_tok = None
       if self.current_tok.type != TT_LPAREN:
         return res.failure(InvalidSyntaxError(
           self.current_tok.pos_start, self.current_tok.pos_end,
-          f"Expected identifier or '('"
+          f"E-Expected identifier or '('"
         ))
     
     res.register_advancement()
@@ -1170,7 +1170,7 @@ class Parser:
         if self.current_tok.type != TT_IDENTIFIER:
           return res.failure(InvalidSyntaxError(
             self.current_tok.pos_start, self.current_tok.pos_end,
-            f"Expected identifier"
+            f"E-Expected identifier"
           ))
 
         arg_name_toks.append(self.current_tok)
@@ -1180,13 +1180,13 @@ class Parser:
       if self.current_tok.type != TT_RPAREN:
         return res.failure(InvalidSyntaxError(
           self.current_tok.pos_start, self.current_tok.pos_end,
-          f"Expected ',' or ')'"
+          f"E-Expected ',' or ')'"
         ))
     else:
       if self.current_tok.type != TT_RPAREN:
         return res.failure(InvalidSyntaxError(
           self.current_tok.pos_start, self.current_tok.pos_end,
-          f"Expected identifier or ')'"
+          f"E-Expected identifier or ')'"
         ))
 
     res.register_advancement()
@@ -1209,7 +1209,7 @@ class Parser:
     if self.current_tok.type != TT_NEWLINE:
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        f"Expected '->' or NEWLINE"
+        f"E-Expected '->' or NEWLINE"
       ))
 
     res.register_advancement()
@@ -1221,7 +1221,7 @@ class Parser:
     if not self.current_tok.matches(TT_KEYWORD, 'cwose'):
       return res.failure(InvalidSyntaxError(
         self.current_tok.pos_start, self.current_tok.pos_end,
-        f"Expected 'cwose'"
+        f"E-Expected 'cwose'"
       ))
 
     res.register_advancement()
@@ -1386,7 +1386,7 @@ class Value:
     if not other: other = self
     return RTError(
       self.pos_start, other.pos_end,
-      'Illegal operation',
+      'Iwwegaw opewation',
       self.context
     )
 
@@ -1424,7 +1424,7 @@ class Number(Value):
       if other.value == 0:
         return None, RTError(
           other.pos_start, other.pos_end,
-          'Division by zero',
+          'Division by zewo',
           self.context
         )
 
@@ -1567,7 +1567,7 @@ class List(Value):
       except:
         return None, RTError(
           other.pos_start, other.pos_end,
-          'Element at this index could not be removed from list because index is out of bounds',
+          'E-Ewement at this index ÚwÚ c-couwd nyot be wemuvd fwom wist because index ÚwÚ is out of bounds',
           self.context
         )
     else:
@@ -1625,7 +1625,7 @@ class BaseFunction(Value):
     if len(args) > len(arg_names):
       return res.failure(RTError(
         self.pos_start, self.pos_end,
-        f"{len(args) - len(arg_names)} too many args passed into {self}",
+        f"{len(args) - len(arg_names)} too many a-awguments passed *huggles tightly* into {self}",
         self.context
       ))
     
@@ -1735,7 +1735,7 @@ class BuiltInFunction(BaseFunction):
         number = int(text)
         break
       except ValueError:
-        print(f"'{text}' must be an integer. Try again!")
+        print(f"'{text}' must be an integew >.< Twy again!")
     return RTResult().success(Number(number))
   execute_input_int.arg_names = ['prompt']
 
@@ -1746,7 +1746,7 @@ class BuiltInFunction(BaseFunction):
         number = float(text)
         break
       except ValueError:
-        print(f"'{text}' must be a float. Try again!")
+        print(f"'{text}' must be a fwoat >.< Twy again!")
     return RTResult().success(Number(number))
   execute_input_float.arg_names = ['prompt']
 
@@ -1782,7 +1782,7 @@ class BuiltInFunction(BaseFunction):
     if not isinstance(list_, List):
       return RTResult().failure(RTError(
         self.pos_start, self.pos_end,
-        "First argument must be list",
+        "Fiwst awgument must be wist",
         exec_ctx
       ))
 
@@ -1797,14 +1797,14 @@ class BuiltInFunction(BaseFunction):
     if not isinstance(list_, List):
       return RTResult().failure(RTError(
         self.pos_start, self.pos_end,
-        "First argument must be list",
+        "Fiwst awgument must be wist",
         exec_ctx
       ))
 
     if not isinstance(index, Number):
       return RTResult().failure(RTError(
         self.pos_start, self.pos_end,
-        "Second argument must be number",
+        "S-S-Second awgument must be nyumbew",
         exec_ctx
       ))
 
@@ -1813,7 +1813,7 @@ class BuiltInFunction(BaseFunction):
     except:
       return RTResult().failure(RTError(
         self.pos_start, self.pos_end,
-        'Element at this index could not be removed from list because index is out of bounds',
+        'E-Ewement at this index ÚwÚ c-couwd nyot be wemuvd fwom wist because index ÚwÚ is out of bounds',
         exec_ctx
       ))
     return RTResult().success(element)
@@ -1826,7 +1826,7 @@ class BuiltInFunction(BaseFunction):
     if not isinstance(listA, List):
       return RTResult().failure(RTError(
         self.pos_start, self.pos_end,
-        "First argument must be list",
+        "Fiwst awgument must be wist",
         exec_ctx
       ))
 
@@ -1852,7 +1852,7 @@ class BuiltInFunction(BaseFunction):
     if not (isinstance(start, Number) and isinstance(stop, Number)) or not (isinstance(start.value,int) and isinstance(stop.value,int)):
       return RTResult().failure(RTError(
         self.pos_start, self.pos_end,
-        "Arguments must be type int",
+        "awguments *whispers to self* must be type int",
         exec_ctx
       ))
     
@@ -1869,7 +1869,7 @@ class BuiltInFunction(BaseFunction):
     if not isinstance(list_, List):
       return RTResult().failure(RTError(
         self.pos_start, self.pos_end,
-        "Argument must be list",
+        "awgument *whispers to self* must be type wist",
         exec_ctx
       ))
 
@@ -1882,7 +1882,7 @@ class BuiltInFunction(BaseFunction):
     if not isinstance(fn, String):
       return RTResult().failure(RTError(
         self.pos_start, self.pos_end,
-        "Second argument must be string",
+        "S-S-Second awgument must be stwing",
         exec_ctx
       ))
 
@@ -1894,7 +1894,7 @@ class BuiltInFunction(BaseFunction):
     except Exception as e:
       return RTResult().failure(RTError(
         self.pos_start, self.pos_end,
-        f"Failed to load script \"{fn}\"\n" + str(e),
+        f"uwu Faiwed t-to woad scwipt \"{fn}\" *runs away*\n" + str(e),
         exec_ctx
       ))
 
@@ -1903,7 +1903,7 @@ class BuiltInFunction(BaseFunction):
     if error:
       return RTResult().failure(RTError(
         self.pos_start, self.pos_end,
-        f"Failed to finish executing script \"{fn}\"\n" +
+        f"owo Faiwed t-to finyish executing scwipt \"{fn}\"\n *whispers to self* " +
         error.as_string(),
         exec_ctx
       ))
@@ -2007,7 +2007,7 @@ class Interpreter:
     if not value:
       return res.failure(RTError(
         node.pos_start, node.pos_end,
-        f"'{var_name}' is not defined",
+        f"'{var_name}' is nyot definyed ÚwÚ",
         context
       ))
 
