@@ -1,0 +1,16 @@
+fwunc fib(n)
+    nyif (n==1) pwease
+        wetuwn 1
+    cwose
+    
+    nyif (n==0) pwease
+        wetuwn 0
+    cwose
+    wetuwn fib(n-1) + fib(n-2)
+cwose
+
+pwint("~~~ Powogwam Fibonacci ~~~\n\n")
+
+vawiabwe num = input_integew("Entew nyumbew ")
+
+pwint("\nFibonacci number at index " + to_stwing(num) + " is " + to_stwing(fib(num)))
