@@ -1,9 +1,0 @@
-fwunc decimal_to_binary(num)
-    nyif num > 1 pwease
-        decimal_to_binary(num / 2)
-    cwose
-    pwint(to_stwing(num % 2))
-cwose   
-
-vawiabwe n = input_integew("Enter a decimal numbew: ")
-decimal_to_binary(n)
