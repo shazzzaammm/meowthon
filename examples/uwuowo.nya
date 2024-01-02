@@ -1,0 +1,11 @@
+fwunc uwu_owo() 
+    nyif wandom_int(0,1) == 0 pwease 
+        wetuwn "owo" 
+    nyelse 
+        wetuwn "uwu"
+    cwose
+cwose
+
+fur i = 0 tuwu 100 pwease
+    pwint("This is so " + uwu_owo() + " core\n")
+cwose

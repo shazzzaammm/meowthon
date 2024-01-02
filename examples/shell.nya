@@ -1,0 +1,8 @@
+vawiabwe out = "Welcome to the uwu terminal\n"
+
+whiwe nyot stwing_samsies(out, "baibai()") pwease
+    pwint(uwuify(out) + "\n")
+    vawiabwe out = input("")
+cwose
+
+pwint("\n" + uwuify("returning to the meowthon interpreter\n"))

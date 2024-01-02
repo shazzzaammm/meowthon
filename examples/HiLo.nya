@@ -1,0 +1,21 @@
+pwint("~~~ Powogwam HiLo ~~~\n")
+
+pwint("\nIm twinking of a numbew between 1 and 100...\n\n")
+
+vawiabwe num = wandom_int(1,100)
+vawiabwe guess = -1
+vawiabwe total_guesses = 0
+
+whiwe num != guess pwease
+    vawiabwe guess = input_integew("Your guess? ")
+    vawiabwe total_guesses = total_guesses + 1
+    nyif guess > num pwease
+        pwint("Too high! ")
+    cwose
+
+    nyif guess < num pwease
+        pwint("Too low! ")
+    cwose
+cwose
+
+pwint(uwuify("You got it! My number was " + to_stwing(num) + ". It took you " + to_stwing(total_guesses) + " guesses."))

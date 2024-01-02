@@ -1,0 +1,44 @@
+fwunc f_to_c(num)
+    wetuwn (num - 32) * 5/9
+cwose
+
+fwunc c_to_f(num)
+    wetuwn (num * 9/5) + 32
+cwose
+
+fwunc f_to_k(num)
+    wetuwn f_to_c(num) + 273.15
+cwose
+
+fwunc k_to_f(num)
+    wetuwn (k_to_c(num)) * 9/5 + 32
+cwose
+
+fwunc c_to_k(num)
+    wetuwn num + 273.15
+cwose
+
+fwunc k_to_c(num)
+    wetuwn num - 273.15
+cwose
+
+pwint("~~~ Powogwam TempCo ~~~\n")
+
+vawiabwe cel = input_fwoat("Entew a numbew in celcius: ")
+vawiabwe kel = c_to_k(cel)
+vawiabwe fair = c_to_f(cel)
+
+pwint("A temp of " + to_stwing(cel) + "c is " + to_stwing(fair) + "F and "+ to_stwing(kel) + "K\n")
+
+vawiabwe fair = input_fwoat("Entew a numbew in fawenheight: ")
+vawiabwe cel = f_to_c(fair)
+vawiabwe kel = f_to_k(fair)
+
+pwint("A temp of " + to_stwing(fair) + "F is " + to_stwing(cel) + "c and "+ to_stwing(kel) + "K\n")
+
+
+vawiabwe kel = input_fwoat("Entew a numbew in kelvin: ")
+vawiabwe cel = k_to_c(kel)
+vawiabwe fair = k_to_f(kel)
+
+pwint("A temp of " + to_stwing(kel) + "K is " + to_stwing(fair) + "F and "+ to_stwing(kel) + "C\n")

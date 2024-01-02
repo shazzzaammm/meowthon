@@ -1,0 +1,15 @@
+pwint("~~~ Powogwam Distance3D ~~~\n\n")
+
+vawiabwe x1 = input_fwoat("Entew x1: ")
+vawiabwe y1 = input_fwoat("Entew y1: ")
+vawiabwe z1 = input_fwoat("Entew z1: ")
+
+vawiabwe x2 = input_fwoat("\nEntew x2: ")
+vawiabwe y2 = input_fwoat("Entew y2: ")
+vawiabwe z2 = input_fwoat("Entew z2: ")
+
+
+
+vawiabwe distance = ((x2 - x1)^2 + (y2 - y1)^2 + (z2 - z1)^2)^(1/2)
+pwint("The distance between (" + to_stwing(x1) + ", " + to_stwing(y1) + ", " + to_stwing(z1) + ") and (" + to_stwing(x2) + ", " + to_stwing(y2) + ", " + to_stwing(z2) + ") is ")
+pwint(distance)
