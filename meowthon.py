@@ -9,6 +9,8 @@ import os
 import math
 from random import randint
 from sys import exit
+from uwuipy import uwuify
+
 #######################################
 # CONSTANTS
 #######################################
@@ -1859,6 +1861,16 @@ class BuiltInFunction(BaseFunction):
     return RTResult().success(Number(randint(start.value, stop.value)))
   execute_rand_int.arg_names = ["start", "stop"]
 
+  def execute_uwuify(self, exec_ctx):
+    return RTResult().success(String(uwuify(str(exec_ctx.symbol_table.get("text")))))
+  execute_uwuify.arg_names = ["text"]
+
+  def execute_string_equals(self, exec_ctx):
+    is_equal = str(exec_ctx.symbol_table.get("a")) == str(exec_ctx.symbol_table.get("b"))
+    return RTResult().success(Number.true if is_equal else Number.false)
+      
+  execute_string_equals.arg_names = ["a","b"]
+
   def execute_to_string(self, exec_ctx):
     return RTResult().success(String(str(exec_ctx.symbol_table.get("num"))))
   execute_to_string.arg_names = ["num"]
@@ -1911,24 +1923,26 @@ class BuiltInFunction(BaseFunction):
     return RTResult().success(Number.null)
   execute_run.arg_names = ["fn"]
 
-BuiltInFunction.print       = BuiltInFunction("print")
-BuiltInFunction.print_ret   = BuiltInFunction("print_ret")
-BuiltInFunction.input       = BuiltInFunction("input")
-BuiltInFunction.input_int   = BuiltInFunction("input_int")
-BuiltInFunction.input_float = BuiltInFunction("input_float")
-BuiltInFunction.clear       = BuiltInFunction("clear")
-BuiltInFunction.is_number   = BuiltInFunction("is_number")
-BuiltInFunction.is_string   = BuiltInFunction("is_string")
-BuiltInFunction.is_list     = BuiltInFunction("is_list")
-BuiltInFunction.is_function = BuiltInFunction("is_function")
-BuiltInFunction.append      = BuiltInFunction("append")
-BuiltInFunction.pop         = BuiltInFunction("pop")
-BuiltInFunction.extend      = BuiltInFunction("extend")
-BuiltInFunction.len					= BuiltInFunction("len")
-BuiltInFunction.run					= BuiltInFunction("run")
-BuiltInFunction.exit				= BuiltInFunction("exit")
-BuiltInFunction.to_string	  = BuiltInFunction("to_string")
-BuiltInFunction.rand_int	  = BuiltInFunction("rand_int")
+BuiltInFunction.print         = BuiltInFunction("print")
+BuiltInFunction.print_ret     = BuiltInFunction("print_ret")
+BuiltInFunction.input         = BuiltInFunction("input")
+BuiltInFunction.input_int     = BuiltInFunction("input_int")
+BuiltInFunction.input_float   = BuiltInFunction("input_float")
+BuiltInFunction.clear         = BuiltInFunction("clear")
+BuiltInFunction.is_number     = BuiltInFunction("is_number")
+BuiltInFunction.is_string     = BuiltInFunction("is_string")
+BuiltInFunction.is_list       = BuiltInFunction("is_list")
+BuiltInFunction.is_function   = BuiltInFunction("is_function")
+BuiltInFunction.append        = BuiltInFunction("append")
+BuiltInFunction.pop           = BuiltInFunction("pop")
+BuiltInFunction.extend        = BuiltInFunction("extend")
+BuiltInFunction.len					  = BuiltInFunction("len")
+BuiltInFunction.run					  = BuiltInFunction("run")
+BuiltInFunction.exit				  = BuiltInFunction("exit")
+BuiltInFunction.to_string	    = BuiltInFunction("to_string")
+BuiltInFunction.rand_int	    = BuiltInFunction("rand_int")
+BuiltInFunction.uwuify	      = BuiltInFunction("uwuify")
+BuiltInFunction.string_equals = BuiltInFunction("string_equals")
 
 #######################################
 # CONTEXT
@@ -2245,6 +2259,8 @@ global_symbol_table.set("wun", BuiltInFunction.run)
 global_symbol_table.set("baibai", BuiltInFunction.exit)
 global_symbol_table.set("to_stwing", BuiltInFunction.to_string)
 global_symbol_table.set("wandom_int", BuiltInFunction.rand_int)
+global_symbol_table.set("uwuify", BuiltInFunction.uwuify)
+global_symbol_table.set("stwing_samsies", BuiltInFunction.string_equals)
 
 def run(fn, text):
   # Generate tokens
