@@ -1868,8 +1868,15 @@ class BuiltInFunction(BaseFunction):
   def execute_string_equals(self, exec_ctx):
     is_equal = str(exec_ctx.symbol_table.get("a")) == str(exec_ctx.symbol_table.get("b"))
     return RTResult().success(Number.true if is_equal else Number.false)
-      
   execute_string_equals.arg_names = ["a","b"]
+
+  def execute_to_lower_case(self, exec_ctx):
+    return RTResult().success(String((str(exec_ctx.symbol_table.get("text"))).lower()))
+  execute_to_lower_case.arg_names = ["text"]
+
+  def execute_to_upper_case(self, exec_ctx):
+    return RTResult().success(String((str(exec_ctx.symbol_table.get("text"))).upper()))
+  execute_to_upper_case.arg_names = ["text"]
 
   def execute_to_string(self, exec_ctx):
     return RTResult().success(String(str(exec_ctx.symbol_table.get("num"))))
@@ -1943,6 +1950,8 @@ BuiltInFunction.to_string	    = BuiltInFunction("to_string")
 BuiltInFunction.rand_int	    = BuiltInFunction("rand_int")
 BuiltInFunction.uwuify	      = BuiltInFunction("uwuify")
 BuiltInFunction.string_equals = BuiltInFunction("string_equals")
+BuiltInFunction.to_lower_case = BuiltInFunction("to_lower_case")
+BuiltInFunction.to_upper_case = BuiltInFunction("to_upper_case")
 
 #######################################
 # CONTEXT
@@ -2261,6 +2270,8 @@ global_symbol_table.set("to_stwing", BuiltInFunction.to_string)
 global_symbol_table.set("wandom_int", BuiltInFunction.rand_int)
 global_symbol_table.set("uwuify", BuiltInFunction.uwuify)
 global_symbol_table.set("stwing_samsies", BuiltInFunction.string_equals)
+global_symbol_table.set("to_lower_case", BuiltInFunction.to_lower_case)
+global_symbol_table.set("to_upper_case", BuiltInFunction.to_upper_case)
 
 def run(fn, text):
   # Generate tokens

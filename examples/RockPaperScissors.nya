@@ -1,0 +1,41 @@
+fwunc to_letter(num)
+    nyif (num==1) pwease
+        wetuwn "R"
+    cwose
+    nyif (num==2) pwease
+        wetuwn "P"
+    cwose
+    nyif (num==3) pwease
+        wetuwn "S"
+    cwose
+cwose
+
+fwunc is_valid_choice(choice)
+    wetuwn stwing_samsies(choice,"R") ow stwing_samsies(choice,"P") ow stwing_samsies(choice,"S") 
+cwose
+
+fwunc prompt_user()
+    vawiabwe choice = input("\nEnter your choice (R, P, or S): ")
+    vawiabwe choice = to_upper_case(choice)
+    whiwe(nyot is_valid_choice(choice)) pwease
+        pwint("invalid choice")    
+        vawiabwe choice = input("\nEnter your choice (R, P, or S): ")
+        vawiabwe choice = to_upper_case(choice)
+    cwose
+    wetuwn choice
+cwose
+
+pwint("~~~ Powogwam Rock Paper Scissors ~~~\n\n")
+
+vawiabwe comp_num = wandom_int(1,3)
+vawiabwe comp_choice = to_letter(comp_num)
+pwint(comp_choice)
+vawiabwe user_choice = prompt_user()
+
+nyif(stwing_samsies(user_choice,comp_choice)) pwease
+    pwint("Its a tie!")
+nyelsenyif (stwing_samsies(user_choice, "R") nyand stwing_samsies(comp_choice, "P")) ow (stwing_samsies(user_choice, "S") nyand stwing_samsies(comp_choice, "R")) ow (stwing_samsies(user_choice, "P") nyand stwing_samsies(comp_choice, "S")) pwease
+    pwint("You lose!")
+nyelsenyif (stwing_samsies(comp_choice, "R") nyand stwing_samsies(user_choice, "P")) ow (stwing_samsies(comp_choice, "S") nyand stwing_samsies(user_choice, "R")) ow (stwing_samsies(user_choice, "S") nyand stwing_samsies(comp_choice, "P"))pwease
+    pwint("You win!")
+cwose
